@@ -11104,3 +11104,52 @@ a.text-dark:focus {
   min-height: 100px;
 }
 
+.obj-cover {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.view {
+  position: relative;
+  overflow: hidden;
+}
+
+.view:hover .hover {
+  opacity: 1;
+}
+
+.view-img .hover {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(52, 58, 64, 0.7);
+  pointer-events: none;
+}
+
+.view-img:hover img {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+
+.view .hover {
+  opacity: 0;
+}
+
+.view img,
+.view .hover {
+  -webkit-transition: 200ms all ease-in;
+  transition: 200ms all ease-in;
+}
+
+.small-avatar {
+  height: 25px;
+  width: 25px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin-right: 10px;
+}
+

@@ -46,4 +46,28 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function adminOrFail()
+    {
+        if ($this->isAdmin()) {
+            return $this;
+        }
+
+        abort(403, 'Unauthorized action.');
+    }
+
+    public function isAdmin()
+    {
+        return $this->attributes['role'] === 'admin';
+    }
+
+    public function dName()
+    {
+        return $this->profile->name ?? $this->login;
+    }
 }

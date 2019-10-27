@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Profile extends Model
+class Comment extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,16 +12,16 @@ class Profile extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id'
+        'content', 'post_id'
     ];
+
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
 
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function getImageURL()
-    {
-        return url('/storage/uploads/' . $this->avatar);
     }
 }

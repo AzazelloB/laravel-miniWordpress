@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('New Post') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ URL::to('/p') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('p') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group">
@@ -27,13 +27,14 @@
                             <label for="post_content" class="col-form-label">{{ __('Post Title') }}</label>
 
                             <textarea
-                                id="post_content"
+                                id="ckeditor"
                                 class="form-control @error('post_content') is-invalid @enderror"
                                 name="post_content"
-                                value="{{ old('post_content') }}"
                                 rows="5"
                                 autocomplete="post_content"
-                                autofocus>
+                                autofocus
+                            >
+                                {{ old('post_content') }}
                             </textarea>
 
                             @error('post_content')

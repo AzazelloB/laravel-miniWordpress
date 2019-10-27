@@ -7,7 +7,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    @if (View::hasSection('title'))
+        <title>@yield('title') - {{ config('app.name', 'miniWordpress') }}</title>
+    @else
+        <title>{{ config('app.name', 'miniWordpress') }}</title>
+    @endif
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -51,10 +55,19 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name ?? Auth::user()->login }} <span class="caret"></span>
+                                    <img src="{{ Auth::user()->profile->getImageURL() }}" class="small-avatar rounded-circle">
+                                    {{ Auth::user()->dName() }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    @if (Auth::user()->isAdmin())
+                                        <a class="dropdown-item" href="{{ route('admin') }}"/>
+                                            {{ __('Dashboard') }}
+                                        </a>
+                                    @endif
+                                    <a class="dropdown-item" href="{{ route('profile', Auth::user()->login) }}"/>
+                                        {{ __('Profile') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

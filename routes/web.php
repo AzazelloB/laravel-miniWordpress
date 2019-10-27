@@ -12,12 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', [
+        'posts' => App\Post::orderBy('created_at', 'desc')->get()
+    ]);
 });
 
 Auth::routes();
 
-Route::get('/u/{username}', 'ProfilesController@index');
+Route::get('/u', 'ProfilesController@index')->name('profiles');
+Route::get('/u/{username}', 'ProfilesController@show')->name('profile');
+Route::patch('/u/{username}', 'ProfilesController@edit')->name('profileUpdate');
+Route::get('/admin', 'ProfilesController@dashboard')->name('admin');
 
-Route::get('/p/create', 'PostsController@create');
-Route::post('/p', 'PostsController@store');
+Route::get('/p/create', 'PostsController@create')->name('pCreate');
+Route::post('/p', 'PostsController@store')->name('p');
+Route::get('/p/{id}', 'PostsController@show')->name('pShow');
+Route::post('/p/{id}/comment', 'CommentsController@store')->name('comment');

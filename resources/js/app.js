@@ -33,8 +33,25 @@ const app = new Vue({
 });
 
 // CKEditor 5
-ClassicEditor
-    .create( document.querySelector( '#post_content' ) )
-    .catch( error => {
-        console.error( error );
+const textarea = document.querySelector( '#ckeditor' );
+if ( document.body.contains( textarea ) ) {
+    ClassicEditor
+        .create( textarea )
+        .catch( error => {
+            console.error( error );
+        } );
+}
+
+const file_input = document.querySelector( '[type="file"]' );
+if ( document.body.contains( file_input ) ) {
+    file_input.addEventListener( 'change', e => {
+        if ( ! e.target.files.length ) {
+            return;
+        }
+        const id = e.target.id;
+        const fileName = e.target.files[0].name;
+        const label = document.querySelector( `[for="${id}"].custom-file-label` );
+
+        label.innerText = fileName;
     } );
+}

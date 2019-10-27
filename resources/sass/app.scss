@@ -11,3 +11,53 @@
 .ck-editor__editable {
     min-height: 100px;
 }
+
+.obj-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.view {
+    position: relative;
+    overflow: hidden;
+
+    &:hover {
+        .hover {
+            opacity: 1;
+        }
+    }
+
+    &-img {
+        .hover {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba($dark, .7);
+            pointer-events: none;
+        }
+
+        &:hover {
+            img {
+                transform: scale(1.2);
+            }
+        }
+    }
+
+    .hover {
+        opacity: 0;
+    }
+
+    img,
+    .hover {
+        transition: 200ms all ease-in;
+    }
+}
+
+.small-avatar {
+    height: 25px;
+    width: 25px;
+    object-fit: cover;
+    margin-right: 10px;
+}

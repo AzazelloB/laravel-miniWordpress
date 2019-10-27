@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
 
 class PostsController extends Controller
 {
-    public function __construct()
+    public function show($id)
     {
-        $this->middleware('auth');
+        $post = Post::findOrFail($id);
+
+        return view('posts.show', [
+            'post' => $post
+        ]);
     }
 
     public function create()

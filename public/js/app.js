@@ -49390,9 +49390,28 @@ var app = new Vue({
   el: '#app'
 }); // CKEditor 5
 
-ClassicEditor.create(document.querySelector('#post_content'))["catch"](function (error) {
-  console.error(error);
-});
+var textarea = document.querySelector('#ckeditor');
+
+if (document.body.contains(textarea)) {
+  ClassicEditor.create(textarea)["catch"](function (error) {
+    console.error(error);
+  });
+}
+
+var file_input = document.querySelector('[type="file"]');
+
+if (document.body.contains(file_input)) {
+  file_input.addEventListener('change', function (e) {
+    if (!e.target.files.length) {
+      return;
+    }
+
+    var id = e.target.id;
+    var fileName = e.target.files[0].name;
+    var label = document.querySelector("[for=\"".concat(id, "\"].custom-file-label"));
+    label.innerText = fileName;
+  });
+}
 
 /***/ }),
 
