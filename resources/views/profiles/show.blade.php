@@ -3,7 +3,7 @@
 @section('title', $user->dName())
 
 @php
-    $isMine = auth()->user()->login === $user->login
+    $isMine = auth()->user() && auth()->user()->login === $user->login
 @endphp
 
 @section('content')
