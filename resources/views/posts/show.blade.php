@@ -10,7 +10,17 @@
                 <img src="{{ $post->getImageURL() }}" class="card-img-top">
 
                 <div class="card-body">
-                    <h3 class="card-title">{{ $post->title }}</h3>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="card-title">{{ $post->title }}</h3>
+                        @if (auth()->user() && auth()->user()->login === $post->user->login)
+                            <form action="{{ route('p.destroy', $post->id) }}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                
+                                <button type="submit" class="btn btn-danger">{{ __('Delete') }}</button>
+                            </form>
+                        @endif
+                    </div>
                     <div class="card-text">
                         {!! $post->content !!}
                     </div>

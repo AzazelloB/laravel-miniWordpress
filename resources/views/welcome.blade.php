@@ -4,8 +4,8 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center text-center">
-        <div class="col-md-6">
+    <div class="row text-center">
+        <div class="col-md-6 offset-md-3">
             <h1>{{ __('Welcome to the ') . config('app.name') }}</h1>
             <p>{{ __('This is Laravel training blog project. That was made only for purpose of learning the basics of Laravel framework.') }}</p>
         </div>
